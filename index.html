@@ -243,13 +243,15 @@
     <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
       <h2 class="text-3xl font-bold">Contact</h2>
       <div class="mt-6 grid md:grid-cols-2 gap-8">
-        <form class="rounded-3xl border border-indigo-100 p-6 space-y-4" onsubmit="event.preventDefault(); const f=new FormData(event.target); const b=encodeURIComponent('Hi, I am '+f.get('name')+'\n\n'+f.get('message')+'\n\n— '+f.get('email')); window.location.href='mailto:RFQ@eastbridgesourcing.com?subject='+encodeURIComponent('New sourcing inquiry from website')+'&body='+b;">
+        <form action="https://formspree.io/f/xblzwaov" method="POST" class="rounded-3xl border border-indigo-100 p-6 space-y-4">
+<input type="hidden" name="_subject" value="New sourcing inquiry from website">
+<input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <div class="grid md:grid-cols-2 gap-4">
             <div><label class="text-sm">Name</label><input required name="name" class="mt-1 w-full rounded-xl border border-neutral-300 p-3" placeholder="Your name"></div>
             <div><label class="text-sm">Email</label><input required type="email" name="email" class="mt-1 w-full rounded-xl border border-neutral-300 p-3" placeholder="you@company.com"></div>
           </div>
           <div><label class="text-sm">Message</label><textarea required name="message" class="mt-1 w-full rounded-xl border border-neutral-300 p-3 h-32" placeholder="What do you need sourced? Specs, quantities, target price…"></textarea></div>
-          <button class="rounded-2xl px-5 py-3 bg-indigo-600 text-white hover:bg-indigo-700">Send</button>
+          <button type="submit" class="rounded-2xl px-5 py-3 bg-indigo-600 text-white hover:bg-indigo-700">Send</button>
         </form>
         <div class="rounded-3xl border border-sky-100 p-6 bg-sky-50">
           <div class="space-y-2 text-neutral-700">
