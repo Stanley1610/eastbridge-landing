@@ -61,7 +61,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>China Sourcing & Manufacturing Partner | EastBridge Sourcing</title>
   <meta name="description" content="China sourcing, procurement and manufacturing support. Sourcing for machines, steel, magnets, castings, packaging, and chemicals. Your China sourcing & manufacturing partner." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><rect width='256' height='256' rx='56' ry='56' fill='%234f46e5'/><text x='50%25' y='62%25' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='140' fill='white'>EBS</text></svg>">
+
+<link rel="icon" type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><rect width='256' height='256' rx='56' ry='56' fill='%234f46e5'/><text x='50%25' y='62%25' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='140' fill='white'>EBS</text></svg>">
+  <meta name="theme-color" content="#4f46e5">
+<link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'><rect width='256' height='256' rx='56' ry='56' fill='%234f46e5'/><text x='50%25' y='62%25' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='140' fill='white'>EBS</text></svg>">
   <meta property="og:title" content="EastBridge Sourcing — China Sourcing & Manufacturing Partner">
   <meta property="og:description" content="China sourcing agent for supplier scouting, factory audits, OEM/ODM, AQL quality control, and logistics (EXW → DDP).">
   <meta property="og:type" content="website">
@@ -249,13 +253,12 @@
     <div class="mx-auto max-w-6xl px-4 py-16 md:py-20">
       <h2 class="text-3xl font-bold">Contact</h2>
       <div class="mt-6 grid md:grid-cols-2 gap-8">
-        <div id="thanks" class="hidden rounded-2xl border border-green-200 bg-green-50 text-green-800 p-4">
+<div id="thanks" class="hidden rounded-2xl border border-green-200 bg-green-50 text-green-800 p-4">
   Thank you for your inquiry! I’ll get back to you within 48 hours.
 </div>
-        <form action="https://formspree.io/f/xblzwaov" method="POST" class="rounded-3xl border border-indigo-100 p-6 space-y-4">
+       <form id="contactForm" action="https://formspree.io/f/xblzwaov" method="POST" class="rounded-3xl border border-indigo-100 p-6 space-y-4">
 <input type="hidden" name="_subject" value="New sourcing inquiry from website">
 <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-          <input type="hidden" name="_next" value="https://eastbridgesourcing.com/?sent=1#contact">
           <div class="grid md:grid-cols-2 gap-4">
             <div><label class="text-sm">Name</label><input required name="name" class="mt-1 w-full rounded-xl border border-neutral-300 p-3" placeholder="Your name"></div>
             <div><label class="text-sm">Email</label><input required type="email" name="email" class="mt-1 w-full rounded-xl border border-neutral-300 p-3" placeholder="you@company.com"></div>
@@ -281,16 +284,33 @@
       <span>Made with ♥ in EU</span>
     </div>
   </footer>
-</body>
   <script>
-  (function () {
-    const q = new URLSearchParams(location.search);
-    if (q.get('sent') === '1') {
-      const el = document.getElementById('thanks');
-      if (el) el.classList.remove('hidden');
-      // vyčistí URL (bez ?sent=1) a nechá ťa pri #contact
-      history.replaceState({}, '', location.pathname + '#contact');
-    }
+  (function(){
+    const form = document.getElementById('contactForm');
+    const banner = document.getElementById('thanks');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // nepresmeruj prehliadač preč
+      const fd = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: fd
+        });
+        if (res.ok) {
+          if (banner) banner.classList.remove('hidden');
+          form.reset();
+          location.hash = '#contact'; // prescroll na kontakt
+        } else {
+          alert('Something went wrong. Please try again.');
+        }
+      } catch {
+        alert('Network error. Please try again.');
+      }
+    });
   })();
 </script>
+</body>
 </html>
